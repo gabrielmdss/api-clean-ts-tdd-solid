@@ -4,7 +4,7 @@
   "description": "Este repositório contém a implementação de uma API completa utilizando **TypeScript**, seguindo os princípios de **TDD (Test-Driven Development)**, **Clean Architecture**, **Design Patterns** e **SOLID**.",
   "main": "index.js",
   "scripts": {
-    "test": "jest --passWithNoTests"
+    "test": "jest --passWithNoTests --watch"
   },
   "keywords": [],
   "author": "",
