@@ -1,0 +1,12 @@
+{
+  "name": "api-clean-ts-tdd-solid",
+  "version": "1.0.0",
+  "description": "Este repositório contém a implementação de uma API completa utilizando **TypeScript**, seguindo os princípios de **TDD (Test-Driven Development)**, **Clean Architecture**, **Design Patterns** e **SOLID**.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
