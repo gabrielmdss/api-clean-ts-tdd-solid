@@ -5,9 +5,11 @@ export default class SignUpController {
     if (!name) {
       return { statusCode: 400, body: new Error("Nome não fornecido!") };
     }
-
     if (!email) {
       return { statusCode: 400, body: new Error("E-mail não fornecido!") };
+    }
+    if(!password){
+      return { statusCode: 400, body: new Error("Senha não fornecida!") };
     }
     return;
   }
