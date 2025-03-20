@@ -1,7 +1,7 @@
 import { HttpRequest, HttpResponse } from "./protocols/http";
 
 export default class SignUpController {
-  handle(httpRequest: any): any {
+  handle(httpRequest: HttpRequest): HttpResponse {
     const { name, email, password, passwordConfirmation } = httpRequest.body;
 
     if (!name) {
