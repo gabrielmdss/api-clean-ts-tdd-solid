@@ -1,3 +1,4 @@
+import MissingParamError from "../erros/missing-param-errors";
 import SignUpController from "./signUp";
 
 describe("SignUp Controller", () => {
@@ -12,7 +13,7 @@ describe("SignUp Controller", () => {
     };
     const httpResponse = sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(400);
-    expect(httpResponse.body).toEqual(new Error("Nome não fornecido!"));
+    expect(httpResponse.body).toEqual(new MissingParamError("name"));
   });
   test("Should return 400 if no email provider", () => {
     const sut = new SignUpController();
@@ -25,7 +26,7 @@ describe("SignUp Controller", () => {
     };
     const httpResponse = sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(400);
-    expect(httpResponse.body).toEqual(new Error("E-mail não fornecido!"));
+    expect(httpResponse.body).toEqual(new MissingParamError("email"));
   });
   test("Should return 400 if no password provider", () => {
     const sut = new SignUpController();
@@ -38,7 +39,7 @@ describe("SignUp Controller", () => {
     };
     const httpResponse = sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(400);
-    expect(httpResponse.body).toEqual(new Error("Senha não fornecida!"));
+    expect(httpResponse.body).toEqual(new MissingParamError("password"));
   });
   test("Should return 400 if password not equal a passwordConfirmation", () => {
     const sut = new SignUpController();
@@ -52,6 +53,6 @@ describe("SignUp Controller", () => {
     };
     const httpResponse = sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(400);
-    expect(httpResponse.body).toEqual(new Error("Senhas devem ser iguais!"));
+    expect(httpResponse.body).toEqual(new MissingParamError("passwordConfirmation"));
   });
 });

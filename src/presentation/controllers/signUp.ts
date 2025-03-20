@@ -1,3 +1,4 @@
+import MissingParamError from "../erros/missing-param-errors";
 import { HttpRequest, HttpResponse } from "./protocols/http";
 
 export default class SignUpController {
@@ -5,16 +6,16 @@ export default class SignUpController {
     const { name, email, password, passwordConfirmation } = httpRequest.body;
 
     if (!name) {
-      return { statusCode: 400, body: new Error("Nome não fornecido!") };
+      return { statusCode: 400, body: new MissingParamError("name") };
     }
     if (!email) {
-      return { statusCode: 400, body: new Error("E-mail não fornecido!") };
+      return { statusCode: 400, body: new MissingParamError("email") };
     }
-    if(!password){
-      return { statusCode: 400, body: new Error("Senha não fornecida!") };
+    if (!password) {
+      return { statusCode: 400, body: new MissingParamError("password") };
     }
-    if(password != passwordConfirmation){
-      return { statusCode: 400, body: new Error("Senhas devem ser iguais!") };
+    if (password != passwordConfirmation) {
+      return { statusCode: 400, body: new MissingParamError("passwordConfirmation") };
     }
     return;
   }
