@@ -13,6 +13,9 @@ export default class SignUpController {
     if(!password){
       return { statusCode: 400, body: new Error("Senha não fornecida!") };
     }
+    if(password != passwordConfirmation){
+      return { statusCode: 400, body: new Error("Senhas devem ser iguais!") };
+    }
     return;
   }
 }
