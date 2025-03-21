@@ -29,7 +29,7 @@ Aplicação dos cinco princípios do SOLID para garantir um código mais modular
 
 ```bash
 # Clone o repositório
-git clone [https://github.com/gabrielmdss/api-clean-ts-tdd-solid.git]
+git clone https://github.com/gabrielmdss/api-clean-ts-tdd-solid.git
 
 # Acesse a pasta do projeto
 cd api-clean-ts-tdd-solid
