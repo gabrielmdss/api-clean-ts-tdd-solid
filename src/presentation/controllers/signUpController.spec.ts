@@ -1,18 +1,25 @@
+import { AccountModel } from "../../domain/models/account";
+import { AddAccount, AddAccountModel } from "../../domain/usecases/add-acount";
 import { InvalidParamError, MissingParamError, ServerError } from "../erros";
 import { EmailValidator } from "../protocols";
 
 import SignUpController from "./signUp";
 
+
 interface SutTypes {
   sut: SignUpController;
   emailValidatorStub: EmailValidator;
+  addAccountStub: AddAccount
 }
+
 const makeSut = (): SutTypes => {
   const emailValidatorStub = makeEmailValidator();
-  const sut = new SignUpController(emailValidatorStub);
+  const addAccountStub = makeAddAcount();
+  const sut = new SignUpController(emailValidatorStub, addAccountStub);
   return {
     sut,
     emailValidatorStub,
+    addAccountStub
   };
 };
 const makeEmailValidator = (): EmailValidator => {
@@ -30,6 +37,21 @@ const makeEmailValidatorWithError = (): EmailValidator => {
     }
   }
   return new EmailValidatorStub();
+};
+const makeAddAcount = (): AddAccount => {
+  class AddAcountStub implements AddAccount {
+    add(account: AddAccountModel): AccountModel {
+      const fakeAccount = {
+        id: "valid_id",
+        name: "valid_name",
+        email: "valid_email@email.com",
+        password: "valid_password"
+      };
+
+      return fakeAccount
+    }
+  }
+  return new AddAcountStub();
 };
 
 describe("SignUp Controller", () => {
@@ -131,5 +153,25 @@ describe("SignUp Controller", () => {
     const httpResponse = sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(500);
     expect(httpResponse.body).toEqual(new ServerError());
+  });
+  test("Should call addAcount with correct values", () => {
+    const { sut, addAccountStub } = makeSut();
+    const addSpy = jest.spyOn(addAccountStub, "add");
+    const httpRequest = {
+      body: {
+        email: "any_email@mail.com",
+        name: "any_name",
+        password: "any_password",
+        passwordConfirmation: "any_password",
+      },
+    };
+    sut.handle(httpRequest);
+    expect(addSpy).toHaveBeenCalledWith(
+      {
+        email: "any_email@mail.com",
+        name: "any_name",
+        password: "any_password"
+      }
+    );
   });
 });
